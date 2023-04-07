@@ -7,6 +7,12 @@ async function getInitialBlogs() {
   const blog = getBlogs();
   return blog;
 }
+const shortify = (text: string, maxLength = 60) => {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return text.substring(0, maxLength) + "...";
+};
 const Page: NextPage = () => {
   const blogs = use(getInitialBlogs());
   console.log(blogs);
@@ -27,7 +33,7 @@ const Page: NextPage = () => {
             </div>
             <h3 className="mt-4 text-sm text-gray-700">{blog.title}</h3>
             <p className="mt-1 text-lg font-medium text-gray-900">
-              {blog.description}
+              {shortify(blog.description, 100)}
             </p>
           </Link>
         ))}
